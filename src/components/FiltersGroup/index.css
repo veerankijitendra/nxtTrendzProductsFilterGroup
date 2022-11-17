@@ -35,3 +35,26 @@
   height: 25px;
   flex-shrink: 0;
 }
+.category-heading {
+  font-size: 1.2rem;
+  font-family: 'Roboto';
+  color: #0f172a;
+}
+.category-options-list {
+  padding: 0;
+}
+.category-option {
+  list-style-type: none;
+  font-size: 0.8rem;
+  font-family: 'Roboto';
+  color: #64748b;
+  line-height: 1.8;
+  cursor: pointer;
+}
+.category-button {
+  background-color: transparent;
+  border: none;
+  color: #64748b;
+  font-family: 'Roboto';
+  cursor: pointer;
+}

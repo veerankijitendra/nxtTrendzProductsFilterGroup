@@ -77,6 +77,7 @@ class AllProductsSection extends Component {
     productsList: [],
     activeOptionId: sortbyOptions[0].optionId,
     titleSearch: '',
+    category: '',
     apiStatus: apiStatusConstants.initial,
   }
 
@@ -91,6 +92,10 @@ class AllProductsSection extends Component {
     }
   }
 
+  updateCategory = category => {
+    this.setState({category}, this.getProducts)
+  }
+
   getProducts = async () => {
     this.setState({
       apiStatus: apiStatusConstants.loading,
@@ -99,8 +104,16 @@ class AllProductsSection extends Component {
 
     // TODO: Update the code to get products with filters applied
 
-    const {activeOptionId, titleSearch} = this.state
-    const apiUrl = `https://apis.ccbp.in/products?sort_by=${activeOptionId}&title_search=${titleSearch}`
+    const {activeOptionId, titleSearch, category} = this.state
+    
+    let apiUrl = `https://apis.ccbp.in/products?sort_by=${activeOptionId}`
+    if (titleSearch!==''){
+        apiUrl+=`title_search&=${titleSearch}`
+    }
+    if(category!==''){
+        apiUrl+=`&category=${category}`
+    })
+
     const options = {
       headers: {
         Authorization: `Bearer ${jwtToken}`,
@@ -199,6 +212,7 @@ class AllProductsSection extends Component {
           categoryOptions={categoryOptions}
           changeInSearchElement={this.changeInSearchElement}
           value={titleSearch}
+          updateCategory={this.updateCategory}
         />
 
         {this.renderList()}
